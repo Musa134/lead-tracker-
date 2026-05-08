@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 
-const REPS = ['Unassigned', 'Ralph', 'Shane', 'Rob']
+const REPS = ['Unassigned', 'Ralph', 'Shane', 'Rob', 'Frank', 'Musa']
 const STATUSES = ['New', 'First Call', 'In System', 'Archived']
 
 const EMPTY_FORM = {
