@@ -223,11 +223,10 @@ export default function App() {
   }
 
   const activeLeads = leads.filter(l => l.status !== 'Archived')
-  const archivedLeads = leads.filter(l => l.status === 'Archived')
-  const filteredLeads = activeLeads.filter(l => {
-    if (filter === 'All') return true
-    return l.assignedTo === filter
-  })
+  const archivedLeads = leads.filter(l => l.status === 'Archived').sort((a, b) => a.company.localeCompare(b.company))
+  const filteredLeads = activeLeads
+    .filter(l => filter === 'All' || l.assignedTo === filter)
+    .sort((a, b) => a.company.localeCompare(b.company))
 
   if (page === 'archive') {
     return (
