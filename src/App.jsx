@@ -36,6 +36,97 @@ function toAppLead(row) {
   }
 }
 
+function ArchivePage({ leads, onBack, updateLeadStatus, deleteLead }) {
+  const [expandedId, setExpandedId] = useState(null)
+
+  function toggleLead(id) {
+    setExpandedId(curr => (curr === id ? null : id))
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-100 pb-20 font-sans text-slate-900">
+      <header className="bg-white px-4 py-8 border-b-2 border-slate-300 sticky top-0 z-30 text-center shadow-md relative">
+        <button onClick={onBack} className="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-black text-slate-500 uppercase tracking-widest hover:text-red-600 transition-colors">
+          ← Back
+        </button>
+        <h1 className="text-2xl font-black text-red-600 tracking-tighter uppercase italic">Archived Accounts</h1>
+        <p className="text-slate-700 text-sm font-black uppercase tracking-widest mt-2">{leads.length} Archived</p>
+      </header>
+
+      <main className="max-w-lg mx-auto px-4 py-6">
+        {leads.length === 0 ? (
+          <p className="text-center text-slate-400 font-black uppercase tracking-widest text-sm py-10">No archived accounts.</p>
+        ) : (
+          <div className="space-y-4">
+            {leads.map(lead => (
+              <div key={lead.id} className="bg-white rounded-3xl border-2 border-slate-200 overflow-hidden shadow-md">
+
+                <div onClick={() => toggleLead(lead.id)} className="w-full cursor-pointer px-6 py-6 flex items-center justify-between gap-4 hover:bg-slate-50 transition-colors">
+                  <div className="min-w-0">
+                    <p className="font-black text-slate-900 text-lg uppercase tracking-tighter mb-1 leading-tight">{lead.company}</p>
+                    <p className="text-sm text-slate-600 font-black uppercase tracking-tight">
+                      {lead.assignedTo} <span className="mx-2 text-slate-300">|</span> {lead.name || 'No Contact'}
+                    </p>
+                  </div>
+                  <div className="px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex-shrink-0 border-2 bg-slate-50 text-slate-400 border-slate-200">
+                    Archived
+                  </div>
+                </div>
+
+                {expandedId === lead.id && (
+                  <div className="border-t-2 border-slate-100 bg-slate-50 p-6 space-y-8">
+
+                    <div className="grid grid-cols-2 gap-6">
+                      <div>
+                        <p className="text-xs font-black text-slate-800 uppercase tracking-widest mb-2">Phone</p>
+                        {lead.phone
+                          ? <a href={`tel:${lead.phone}`} className="text-red-600 font-black text-lg hover:underline">{lead.phone}</a>
+                          : <p className="text-slate-400 font-bold">N/A</p>}
+                      </div>
+                      <div>
+                        <p className="text-xs font-black text-slate-800 uppercase tracking-widest mb-2">Assigned To</p>
+                        <p className="font-black text-slate-900">{lead.assignedTo}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-5">
+                      <p className="text-xs font-black text-slate-800 uppercase tracking-widest">Activity History</p>
+                      <div className="space-y-4 max-h-80 overflow-y-auto pr-1">
+                        {lead.comments && lead.comments.length > 0 ? (
+                          lead.comments.map(c => (
+                            <div key={c.id} className="bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm">
+                              <div className="flex justify-between items-center mb-3">
+                                <span className="text-xs font-black text-red-600 uppercase tracking-tight">{c.author}</span>
+                                <span className="text-[10px] text-slate-500 font-black uppercase">{c.date}</span>
+                              </div>
+                              <p className="text-base font-bold text-slate-700 leading-snug">{c.text}</p>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-sm text-slate-400 font-bold italic text-center py-4">No activity captured yet.</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="pt-6 flex flex-col gap-4">
+                      <button onClick={() => updateLeadStatus(lead.id, 'In System')} className="w-full py-4 bg-white text-slate-600 text-xs font-black uppercase tracking-widest rounded-2xl border-2 border-slate-200 hover:text-red-600 hover:border-red-600 transition-all">
+                        Restore Account
+                      </button>
+                      <button onClick={() => deleteLead(lead.id)} className="text-[10px] text-slate-400 hover:text-red-600 font-black uppercase tracking-widest self-center py-2 transition-colors">
+                        Permanently Delete
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </main>
+    </div>
+  )
+}
+
 export default function App() {
   const [form, setForm] = useState(EMPTY_FORM)
   const [leads, setLeads] = useState([])
@@ -44,6 +135,7 @@ export default function App() {
   const [newComment, setNewComment] = useState('')
   const [commentAuthor, setCommentAuthor] = useState('Unassigned')
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState('main')
 
   useEffect(() => { fetchLeads() }, [])
 
@@ -131,10 +223,22 @@ export default function App() {
   }
 
   const activeLeads = leads.filter(l => l.status !== 'Archived')
+  const archivedLeads = leads.filter(l => l.status === 'Archived')
   const filteredLeads = activeLeads.filter(l => {
     if (filter === 'All') return true
     return l.assignedTo === filter
   })
+
+  if (page === 'archive') {
+    return (
+      <ArchivePage
+        leads={archivedLeads}
+        onBack={() => setPage('main')}
+        updateLeadStatus={updateLeadStatus}
+        deleteLead={deleteLead}
+      />
+    )
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 pb-20 font-sans text-slate-900">
@@ -142,6 +246,9 @@ export default function App() {
       <header className="bg-white px-4 py-8 border-b-2 border-slate-300 sticky top-0 z-30 text-center shadow-md">
         <h1 className="text-2xl font-black text-red-600 tracking-tighter uppercase italic">Colour X Lead Tracker</h1>
         <p className="text-slate-700 text-sm font-black uppercase tracking-widest mt-2">{activeLeads.length} Total Leads Active</p>
+        <button onClick={() => setPage('archive')} className="text-xs text-slate-400 font-black uppercase tracking-widest mt-1 hover:text-red-600 transition-colors">
+          View Archive ({archivedLeads.length}) →
+        </button>
       </header>
 
       <main className="max-w-lg mx-auto px-4 py-6 space-y-10">
