@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#000000"/>
+
+  <defs>
+    <!-- Clip path is the exact same X shape as the red bars -->
+    <clipPath id="x-clip">
+      <rect x="16" y="206" width="480" height="100" transform="rotate(45, 256, 256)"/>
+      <rect x="16" y="206" width="480" height="100" transform="rotate(-45, 256, 256)"/>
+    </clipPath>
+  </defs>
+
+  <!-- Red X -->
+  <rect x="16" y="206" width="480" height="100" fill="#CC1414" transform="rotate(45, 256, 256)"/>
+  <rect x="16" y="206" width="480" height="100" fill="#CC1414" transform="rotate(-45, 256, 256)"/>
+
+  <!-- White stripes clipped to stay inside the red X only -->
+  <g clip-path="url(#x-clip)">
+    <line x1="80" y1="80" x2="432" y2="432" stroke="white" stroke-width="22"/>
+    <line x1="432" y1="80" x2="80" y2="432" stroke="white" stroke-width="22"/>
+  </g>
+</svg>
