@@ -243,7 +243,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-100 pb-20 font-sans text-slate-900">
 
       <header className="bg-white px-4 py-8 border-b-2 border-slate-300 sticky top-0 z-30 text-center shadow-md">
-        <h1 className="text-2xl font-black text-red-600 tracking-tighter uppercase italic">Colour X Lead Tracker</h1>
+        <h1 className="text-2xl font-black text-red-600 tracking-tighter uppercase italic">Colour X Leads Tracker</h1>
         <p className="text-slate-700 text-sm font-black uppercase tracking-widest mt-2">{activeLeads.length} Total Leads Active</p>
         <button onClick={() => setPage('archive')} className="text-xs text-slate-400 font-black uppercase tracking-widest mt-1 hover:text-red-600 transition-colors">
           View Archive ({archivedLeads.length}) →
