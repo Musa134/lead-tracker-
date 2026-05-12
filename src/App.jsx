@@ -215,6 +215,15 @@ export default function App() {
     fetchLeads()
   }
 
+  async function updateLeadAssignment(id, newRep) {
+    const { error } = await supabase
+      .from('leads')
+      .update({ assigned_to: newRep })
+      .eq('id', id)
+    if (error) { console.error(error); return }
+    fetchLeads()
+  }
+
   async function deleteLead(id) {
     if (!window.confirm('Permanently delete this account?')) return
     const { error } = await supabase.from('leads').delete().eq('id', id)
@@ -331,6 +340,12 @@ export default function App() {
                           {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
                         </select>
                       </div>
+                    </div>
+                    <div>
+                      <p className="text-xs font-black text-slate-800 uppercase tracking-widest mb-2">Assign To</p>
+                      <select value={lead.assignedTo} onChange={(e) => updateLeadAssignment(lead.id, e.target.value)} className="w-full bg-white border-2 border-slate-200 rounded-xl px-3 py-3 text-sm font-bold text-slate-900">
+                        {REPS.map(r => <option key={r} value={r}>{r}</option>)}
+                      </select>
                     </div>
 
                     <div className="space-y-5">
