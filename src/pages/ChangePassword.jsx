@@ -34,10 +34,10 @@ export default function ChangePassword() {
           </div>
           <p className="text-xl font-black text-slate-900 uppercase tracking-tight">Password Updated</p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/login')}
             className="mt-8 bg-red-600 hover:bg-red-700 text-white font-black py-4 px-8 rounded-2xl uppercase text-sm tracking-widest transition-all active:scale-95"
           >
-            Back to Hub
+            Sign In
           </button>
         </div>
       </div>

@@ -26,7 +26,7 @@ function AppRoutes() {
       <Route path="/crm" element={<ProtectedRoute><CRMFeed /></ProtectedRoute>} />
       <Route path="/crm/log" element={<ProtectedRoute><LogCall /></ProtectedRoute>} />
       <Route path="/crm/accounts" element={<ProtectedRoute><AllAccounts /></ProtectedRoute>} />
-      <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+      <Route path="/change-password" element={<ChangePassword />} />
     </Routes>
   )
 }
