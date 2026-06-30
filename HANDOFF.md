@@ -46,6 +46,9 @@ Previous deploys went via `vercel --prod` CLI (deployed local files, bypassed gi
 ## PWA cache gotcha
 After every Vercel deploy, users may need to open in incognito or clear site data to get the fresh version. The service worker caches aggressively.
 
+## Nothing outstanding
+All features from this session confirmed working. Clean state.
+
 ## Pending / future ideas
 - Account notes — sticky note on account level (not tied to a call)
 - Account tags — hot/cold/new etc. for filtering
