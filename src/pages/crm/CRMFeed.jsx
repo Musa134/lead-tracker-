@@ -472,7 +472,7 @@ export default function CRMFeed() {
             {selectedCall.objectives && (
               <div>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Objectives</p>
-                <p className="text-sm font-bold text-slate-700 bg-slate-50 rounded-2xl p-4 border-2 border-slate-100 leading-relaxed">
+                <p className="text-sm font-bold text-slate-700 bg-slate-50 rounded-2xl p-4 border-2 border-slate-100 leading-relaxed whitespace-pre-wrap">
                   {selectedCall.objectives}
                 </p>
               </div>
@@ -481,7 +481,7 @@ export default function CRMFeed() {
             {selectedCall.call_notes && (
               <div>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Call Notes</p>
-                <p className="text-sm font-bold text-slate-700 bg-slate-50 rounded-2xl p-4 border-2 border-slate-100 leading-relaxed">
+                <p className="text-sm font-bold text-slate-700 bg-slate-50 rounded-2xl p-4 border-2 border-slate-100 leading-relaxed whitespace-pre-wrap">
                   {selectedCall.call_notes}
                 </p>
               </div>
@@ -490,7 +490,7 @@ export default function CRMFeed() {
             {selectedCall.whats_next && (
               <div>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">What's Next & When</p>
-                <p className="text-sm font-bold text-slate-700 bg-slate-50 rounded-2xl p-4 border-2 border-slate-100 leading-relaxed">
+                <p className="text-sm font-bold text-slate-700 bg-slate-50 rounded-2xl p-4 border-2 border-slate-100 leading-relaxed whitespace-pre-wrap">
                   {selectedCall.whats_next}
                 </p>
               </div>

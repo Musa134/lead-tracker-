@@ -11,9 +11,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'icon.svg', 'apple-touch-icon-180x180.png'],
       manifest: {
-        name: 'Lead Tracker',
-        short_name: 'Leads',
-        description: 'Colour X lead management for the sales team',
+        name: 'CX Sales Hub',
+        short_name: 'CX Sales Hub',
+        description: 'Colour X sales hub for leads and call tracking',
         theme_color: '#1e3a8a',
         background_color: '#f8fafc',
         display: 'standalone',

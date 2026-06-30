@@ -1,17 +1,34 @@
-# Lead Tracker
+# Lead Tracker (Colour X)
 
-Mobile-first lead capture app for retail store use.
+Mobile-first lead capture and tracking app for the Colour X retail store sales team.
 
 ## Stack
 - Vite + React 19
 - Tailwind CSS v4 (`@tailwindcss/vite`)
-- No backend — localStorage for persistence
+- Supabase (Postgres) — project URL: https://gsxeiwgrstsmztcqexpb.supabase.co
+- Vercel for hosting
+- PWA — installable on iOS and Android, runs fullscreen
 
-## Project Structure
-- `src/App.jsx` — single-page app, all logic lives here for now
+## Key Files
+- `src/App.jsx` — all app logic lives here
 - `src/index.css` — Tailwind import only
+- `.env.local` — Supabase keys, never commit this
 
-## Design
-- Mobile-first, max-width container for tablet/desktop
-- Blue (`blue-600/700`) and white (`slate-50`) palette
-- Clean card-based UI, no clutter
+## Supabase Tables
+- `leads` — company, name, phone, assigned_to, status, opportunity, reporting_group
+- `lead_comments` — id, lead_id, text, author, created_at (cascades on lead delete)
+
+## Reps
+Unassigned, Ralph, Shane, Rob, Frank, Musa
+
+## Features
+- New lead intake form
+- Filter by rep
+- Leads sorted A→Z by company name
+- Expand lead card → view/add comments, update status, reassign rep, archive, delete
+- Archive page — restore or view archived leads
+
+## Rules
+- Always test on mobile (this is a mobile-first app)
+- Never commit `.env.local`
+- Deploy by pushing to GitHub — Vercel auto-redeploys

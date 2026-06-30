@@ -11,10 +11,12 @@
     "generate-pwa-assets": "pwa-assets-generator --config pwa-assets.config.js"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@supabase/supabase-js": "^2.105.4",
     "@tailwindcss/vite": "^4.2.4",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-router-dom": "^7.16.0",
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
