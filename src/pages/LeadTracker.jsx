@@ -3,14 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import emailjs from '@emailjs/browser'
 import { supabase } from '../lib/supabase'
 
-const REPS = ['Unassigned', 'Ralph', 'Shane', 'Rob', 'Frank', 'Musa']
+const REPS = ['Unassigned', 'Ralph', 'Shane', 'Rob', 'Frank', 'Jeff', 'Musa']
 
 const REP_EMAILS = {
   Ralph: 'ralph@colourx.ca',
   Shane: 'shane@colourx.ca',
   Rob: 'robert@colourx.ca',
   Musa: 'musa.nizam@benjaminmoore.com',
-  Frank: 'frank@colourx.ca'
+  Frank: 'frank@colourx.ca',
+  Jeff: 'Jeff@Colourx.ca'
 }
 
 const EMAILJS_SERVICE = 'service_0y3zdv8'
